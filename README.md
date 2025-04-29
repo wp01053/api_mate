@@ -1,8 +1,36 @@
 # ApiMate
 
-A lightweight, elegant API call wrapper for Dio + Retrofit in Flutter.  
-It standardizes response handling using a sealed class result (`ApiMateResult`)  
-and supports pretty logging + global config with minimal boilerplate.
+Tired of writing repetitive `try-catch`, status code checks, and logging for every API call?
+
+**ApiMate** is the simplest way to wrap Dio + Retrofit with clean success/failure handling, global config, and beautiful logging — all in **one line**.
+
+---
+
+### 🍯 From this 👇
+
+```dart
+try {
+  final response = await dio.get('/user');
+  if (response.statusCode == 200) {
+    // success
+  } else {
+    // handle error
+  }
+} catch (e) {
+  // error
+}
+```
+
+### ✨ To this 👇
+
+```dart
+final result = await ApiMate(() => client.getUser()).call();
+
+switch (result) {
+  case ApiMateSuccess(): print(result.data);
+  case ApiMateFailure(): print(result.errorMessage);
+}
+```
 
 ---
 
