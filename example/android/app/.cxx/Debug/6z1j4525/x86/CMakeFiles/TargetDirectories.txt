@@ -1,0 +1,2 @@
+/Users/jaeyeoupjung/StudioProjects/api_mate/example/android/app/.cxx/Debug/6z1j4525/x86/CMakeFiles/edit_cache.dir
+/Users/jaeyeoupjung/StudioProjects/api_mate/example/android/app/.cxx/Debug/6z1j4525/x86/CMakeFiles/rebuild_cache.dir
