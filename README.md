@@ -1,97 +1,73 @@
 # ApiMate
 
-Tired of writing repetitive `try-catch`, status code checks, and logging for every API call?
-
-**ApiMate** is the simplest way to wrap Dio + Retrofit with clean success/failure handling, global config, and beautiful logging — all in **one line**.
+A lightweight, elegant API call wrapper for Dio + Retrofit in Flutter.
+It wraps responses into a consistent sealed result, provides pretty logging, global configuration, and now supports **automatic retry**.
 
 ---
 
-### 🍯 From this 👇
+## 🚀 What's New in v0.3.0
 
-```dart
-try {
-  final response = await dio.get('/user');
-  if (response.statusCode == 200) {
-    // success
-  } else {
-    // handle error
-  }
-} catch (e) {
-  // error
-}
+- ✅ **Automatic retry** support (configurable globally and per-request)
+- 🕓 `retryCount` and `retryDelay` in `ApiMateConfig`
+- 🎯 Clean fallback logic for `DioException`-based retry types
+
+---
+
+## 📦 Installation
+
+```yaml
+dependencies:
+  api_mate: ^0.3.0
 ```
 
-### ✨ To this 👇
+---
+
+## ✨ Features
+
+- ✅ Supports both `Future<T>` and `Future<HttpResponse<T>>`
+- 📦 Sealed result: `ApiMateSuccess`, `ApiMateFailure`
+- 🪵 Pretty logging for requests, responses, and errors
+- 🌐 Global config via `ApiMateConfig`
+- 🔁 Automatic retry on timeout or connection errors
+- 🔧 Per-request override of logging or retry settings
+
+---
+
+## 🧩 Usage
+
+### Minimal Example
 
 ```dart
 final result = await ApiMate(() => client.getUser()).call();
 
 switch (result) {
-  case ApiMateSuccess(): print(result.data);
-  case ApiMateFailure(): print(result.errorMessage);
+  case ApiMateSuccess():
+    print(result.data);
+    break;
+  case ApiMateFailure():
+    print(result.errorMessage);
+    break;
 }
 ```
 
----
+### Retry Example
 
-## 🚀 Features
-
-- ✅ Supports both `Future<T>` and `Future<HttpResponse<T>>`
-- 📦 Sealed result type: `ApiMateSuccess`, `ApiMateFailure`
-- 🪵 Pretty console logger for request/response/error
-- 🌐 Global config with `ApiMateConfig.enableLogging`
-- 🧼 Clean structure without callbacks or magic
-
----
-
-## 🔧 Installation
-
-```yaml
-dependencies:
-  api_mate: ^0.2.3
+```dart
+final result = await ApiMate(
+  () => client.getUser(),
+  retry: 2,
+  retryDelay: Duration(seconds: 1),
+).call();
 ```
 
----
-
-## 🛠️ Usage
-
-### 1. Optional: Disable logging globally
+### Global Retry Setting
 
 ```dart
 void main() {
-  ApiMateConfig.enableLogging = false; // disable logs globally
+  ApiMateConfig.retryCount = 3;
+  ApiMateConfig.retryDelay = Duration(seconds: 2);
   runApp(MyApp());
 }
-```
-
----
-
-### 2. Make an API call
-
-```dart
-final request = ApiMate(() => client.getPost(1));
-final result = await request.call();
-
-switch (result) {
-  case ApiMateSuccess<Post>():
-    print('✅ Success: ${result.data.title}');
-    break;
-  case ApiMateFailure():
-    print('❌ Error: ${result.errorMessage}');
-    break;
-}
-```
-
----
-
-### 3. Override logging per request (optional)
-
-```dart
-final request = ApiMate(
-  () => client.getPost(1),
-  enableLogging: true, // force enable for this call
-);
-await request.call();
 ```
 
 ---
@@ -101,12 +77,11 @@ await request.call();
 ```
 lib/
   api_mate/
-    api_mate.dart
-    api_mate_config.dart
-    api_mate_logger.dart
-    api_mate_result.dart
-    api_mate_exception.dart
+    api_mate.dart              // Main class with retry logic
+    api_mate_config.dart       // Global settings
+    api_mate_logger.dart       // Pretty logger
+    api_mate_result.dart       // Sealed result class
+    api_mate_exception.dart    // Exception wrapper
 ```
 
 ---
-
