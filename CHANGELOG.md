@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.3] - 2025-04-30
+
+- Changed ReadMe.md
+ 
 ## [0.2.2] - 2025-04-30
 
 - Added ApiMateConfig to control global logging

@@ -4,6 +4,9 @@ import 'api_config.dart';
 import 'api_mate_logger.dart';
 import 'api_mate_result.dart';
 
+/// Wrapper class that simplifies Dio/Retrofit API calls.
+///
+/// Automatically wraps responses into [ApiMateResult] types and handles logging.
 class ApiMate<T> {
   final Future<T> Function() _apiCall;
   final bool? enableLogging;

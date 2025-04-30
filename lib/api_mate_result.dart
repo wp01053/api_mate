@@ -1,3 +1,6 @@
+/// Wrapper class that simplifies Dio/Retrofit API calls.
+///
+/// Automatically wraps responses into [ApiMateResult] types and handles logging.
 sealed class ApiMateResult<T> {}
 
 class ApiMateSuccess<T> extends ApiMateResult<T> {

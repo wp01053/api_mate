@@ -48,7 +48,7 @@ switch (result) {
 
 ```yaml
 dependencies:
-  api_mate: ^0.2.2
+  api_mate: ^0.2.3
 ```
 
 ---

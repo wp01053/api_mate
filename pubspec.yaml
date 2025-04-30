@@ -1,6 +1,6 @@
 name: api_mate
 description: A minimal API response wrapper for Dio + Retrofit in Flutter. Built-in logger, global config, and sealed result types.
-version: 0.2.2
+version: 0.2.3
 repository: https://github.com/wp01053/api_mate
 homepage: https://github.com/wp01053/api_mate
 

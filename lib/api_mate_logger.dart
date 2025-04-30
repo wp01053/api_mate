@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+/// Logger for ApiMate that pretty-prints API request, response, and error.
 class ApiMateLogger {
   static void logRequest(String path) {
     final now = DateTime.now();
